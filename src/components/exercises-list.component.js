@@ -18,27 +18,27 @@ export default class ExercisesList extends Component {
   constructor(props) {
     super(props);
 
-    this.deleteExercise = this.deleteExercise.bind(this);
+    this.deleteExercise = this.deleteExercise.bind(this)
 
-    this.state = { exercises: [] }
-
+    this.state = {exercises: []};
   }
 
   componentDidMount() {
     axios.get('http://localhost:5000/exercises/')
-      .then(res => {
-        this.setState({ exercises: res.data })
+      .then(response => {
+        this.setState({ exercises: response.data })
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
       })
   }
 
   deleteExercise(id) {
-    axios.delete('http://localhost:5000/exercies/'+id)
-      .then(res => console.log(res.data));
+    axios.delete('http://localhost:5000/exercises/'+id)
+      .then(response => { console.log(response.data)});
+
     this.setState({
-      exercises: this.state.exercises.filter(el => el._id !== id) //control for exercises on db
+      exercises: this.state.exercises.filter(el => el._id !== id)
     })
   }
 
